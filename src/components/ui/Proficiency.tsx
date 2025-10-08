@@ -2,14 +2,18 @@ import Selection from "./Selection";
 
 interface ProficiencyProps {
   id: string;
+  value: string;
+  onChange: (val: string) => void;
 }
 
-function Proficiency({ id }: ProficiencyProps) {
+function Proficiency({ id, value, onChange }: ProficiencyProps) {
   return (
     <div>
       <Selection
         id={id}
-        placeholder="Proficiency in this langugae"
+        value={value}
+        onChange={onChange}
+        placeholder="Proficiency in this language"
         options={[
           "Native",
           "Daily Conversation Level",

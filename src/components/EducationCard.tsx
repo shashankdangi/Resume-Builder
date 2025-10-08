@@ -2,46 +2,85 @@ import MonthPicker from "./ui/MonthPicker";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Checkbox } from "./ui/checkbox";
-import { useState } from "react";
 import { Button } from "./ui/button";
+import { useResumeStore } from "@/store/userResumeStore";
+import type { EducationInfo } from "@/store/userResumeStore";
 
-interface EducationCard {
-  deleteCard: () => void;
+interface EducationCardProps {
+  education: EducationInfo;
+  onDelete: () => void;
 }
 
-function EducationCard({ deleteCard }: EducationCard) {
-  const [isDisabled, setIsDisabled] = useState(false);
+function EducationCard({ education, onDelete }: EducationCardProps) {
+  const { updateEducation } = useResumeStore();
 
-  const handleEnrolled = () => {
-    setIsDisabled(true);
+  const handleEnrolled = (checked: boolean) => {
+    updateEducation(education.id, { isEnrolled: checked });
+  };
+
+  const updateField = <K extends keyof EducationInfo>(
+    field: K,
+    value: EducationInfo[K]
+  ) => {
+    updateEducation(education.id, { [field]: value });
   };
 
   return (
     <div className="grid gap-4">
+      {/* Date range */}
       <div className="grid grid-cols-2 gap-5">
-        <MonthPicker Name={"From"} />
-        <MonthPicker Name={"Until"} isDisabled={isDisabled} />
+        <MonthPicker
+          Name="From"
+          value={education.from}
+          onChange={(val) => updateField("from", val)}
+        />
+        <MonthPicker
+          Name="Until"
+          value={education.until}
+          onChange={(val) => updateField("until", val)}
+          isDisabled={education.isEnrolled}
+        />
       </div>
+
+      {/* Enrollment */}
       <div className="flex items-start gap-3">
-        <Checkbox id="currentlyEnrolled" onClick={handleEnrolled} />
-        <Label htmlFor="currentlyEnrolled">
-          Currently Enrolled in this Institution{" "}
+        <Checkbox
+          id={`enrolled-${education.id}`}
+          checked={education.isEnrolled}
+          onCheckedChange={(checked: boolean) => handleEnrolled(checked)}
+        />
+        <Label htmlFor={`enrolled-${education.id}`}>
+          Currently Enrolled in this Institution
         </Label>
       </div>
+
+      {/* Institution */}
       <div className="flex flex-col gap-2">
-        <Label htmlFor="Institution">Intitution</Label>
+        <Label htmlFor={`institution-${education.id}`}>Institution</Label>
         <Input
-          id="Institution"
+          id={`institution-${education.id}`}
           type="text"
           placeholder="Enter Your Institution Name"
-        ></Input>
+          value={education.school}
+          onChange={(e) => updateField("school", e.target.value)}
+        />
       </div>
+
+      {/* Major */}
       <div className="flex flex-col gap-2">
-        <Label htmlFor="Major">Major</Label>
-        <Input id="Major" type="text" placeholder="Enter Your Major"></Input>
+        <Label htmlFor={`major-${education.id}`}>Major</Label>
+        <Input
+          id={`major-${education.id}`}
+          type="text"
+          placeholder="Enter Your Major"
+          value={education.major}
+          onChange={(e) => updateField("major", e.target.value)}
+        />
       </div>
+
+      {/* Delete Button */}
       <div className="justify-self-center">
-        <Button className="" variant={"destructive"} onClick={deleteCard}>
+        <Button variant="destructive" onClick={onDelete}>
           Delete
         </Button>
       </div>

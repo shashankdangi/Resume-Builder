@@ -9,15 +9,31 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import type { MonthYear } from "@/store/userResumeStore";
 
 interface DateTypes {
   Name: string;
+  value: MonthYear;
+  onChange: (date: MonthYear) => void;
 }
 
-export function DatePicker({ Name }: DateTypes) {
+export function DatePicker({ Name, value, onChange }: DateTypes) {
   const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState<Date | undefined>(undefined);
+  const [date, setDate] = React.useState<Date | undefined>(
+    value?.date ? new Date(value.date) : undefined
+  );
 
+  React.useEffect(() => {
+    if (value?.date) setDate(new Date(value.date));
+  }, [value]);
+
+  const handleSelect = (date: Date | undefined) => {
+    setDate(date);
+    setOpen(false);
+    if (date && onChange) {
+      onChange({ date: date.toISOString() }); // send ISO String
+    }
+  };
   return (
     <div className="flex flex-col gap-3">
       <Label htmlFor="date" className="px-1">
@@ -39,10 +55,8 @@ export function DatePicker({ Name }: DateTypes) {
             mode="single"
             selected={date}
             captionLayout="dropdown"
-            onSelect={(date) => {
-              setDate(date);
-              setOpen(false);
-            }}
+            onSelect={handleSelect}
+            toYear={2070}
           />
         </PopoverContent>
       </Popover>

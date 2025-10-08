@@ -5,9 +5,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
+import { useResumeStore } from "@/store/userResumeStore";
 
 function ShibouSection() {
+  const { summaries, setSummaries } = useResumeStore();
   return (
     <div>
       {" "}
@@ -24,6 +26,8 @@ function ShibouSection() {
             <Textarea
               className="w-full h-40 m-0 text-sm"
               placeholder="Enter Your Reason to Apply Here"
+              value={summaries.shibou}
+              onChange={(e) => setSummaries({ shibou: e.target.value })}
             />
           </div>
         </CardContent>
