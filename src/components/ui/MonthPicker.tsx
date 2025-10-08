@@ -31,30 +31,66 @@ const months = [
   "December",
 ];
 
+import type { MonthYear } from "@/store/userResumeStore";
+
+
 interface MonthPickerProps {
   Name: string;
   isDisabled?: boolean;
+  value?: MonthYear;
+  onChange?: (val: MonthYear) => void;
 }
 
-export function MonthPicker({ Name, isDisabled }: MonthPickerProps) {
+export default function MonthPicker({
+  Name,
+  isDisabled = false,
+  value,
+  onChange,
+}: MonthPickerProps) {
   const [open, setOpen] = React.useState(false);
-  const [selectedYear, setSelectedYear] = React.useState<number>(
-    new Date().getFullYear()
-  );
-  const [selectedMonth, setSelectedMonth] = React.useState<number | null>(null);
 
-  const years = Array.from({ length: 131 }, (_, i) => 1900 + i); // 1900 → currentYear
+  // Initialize from props or defaults
+  const [selectedYear, setSelectedYear] = React.useState<number>(
+    value?.year ? parseInt(value.year) : new Date().getFullYear()
+  );
+  const [selectedMonth, setSelectedMonth] = React.useState<number | null>(
+    value?.month ? months.indexOf(value.month) : null
+  );
+
+  const years = Array.from({ length: 200 }, (_, i) => 1900 + i);
 
   const displayText =
     selectedMonth !== null
       ? `${months[selectedMonth]} ${selectedYear}`
       : "Select month";
 
+  // Update when `value` changes externally (like store refresh)
+  React.useEffect(() => {
+    if (value) {
+      setSelectedYear(
+        value.year ? parseInt(value.year) : new Date().getFullYear()
+      );
+      setSelectedMonth(value.month ? months.indexOf(value.month) : null);
+    }
+  }, [value]);
+
+  // Handle month selection
+  const handleSelect = (monthIndex: number) => {
+    setSelectedMonth(monthIndex);
+    const selected = {
+      month: months[monthIndex],
+      year: selectedYear.toString(),
+    };
+    onChange?.(selected);
+    setOpen(false);
+  };
+
   return (
     <div className="flex flex-col gap-3">
       <Label htmlFor="month" className="px-1">
         {Name}
       </Label>
+
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -67,11 +103,22 @@ export function MonthPicker({ Name, isDisabled }: MonthPickerProps) {
             <ChevronDownIcon />
           </Button>
         </PopoverTrigger>
+
         <PopoverContent className="w-auto p-4" align="start">
           {/* Year Selector */}
           <Select
             value={selectedYear.toString()}
-            onValueChange={(value) => setSelectedYear(parseInt(value))}
+            onValueChange={(val) => {
+              const yearNum = parseInt(val);
+              setSelectedYear(yearNum);
+              // If month already chosen, send update
+              if (selectedMonth !== null) {
+                onChange?.({
+                  month: months[selectedMonth],
+                  year: yearNum.toString(),
+                });
+              }
+            }}
           >
             <SelectTrigger className="w-[120px] mb-4">
               <SelectValue placeholder="Year" />
@@ -91,10 +138,7 @@ export function MonthPicker({ Name, isDisabled }: MonthPickerProps) {
               <Button
                 key={month}
                 variant={selectedMonth === index ? "default" : "outline"}
-                onClick={() => {
-                  setSelectedMonth(index);
-                  setOpen(false); // close popover on selection
-                }}
+                onClick={() => handleSelect(index)}
                 className="text-sm"
               >
                 {month.slice(0, 3)}
@@ -106,5 +150,3 @@ export function MonthPicker({ Name, isDisabled }: MonthPickerProps) {
     </div>
   );
 }
-
-export default MonthPicker;

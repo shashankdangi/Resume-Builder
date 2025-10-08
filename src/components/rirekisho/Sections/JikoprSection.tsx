@@ -5,9 +5,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
+import { useResumeStore } from "@/store/userResumeStore";
 
 function JikoprSection() {
+  const { summaries, setSummaries } = useResumeStore();
   return (
     <div>
       {" "}
@@ -24,6 +26,8 @@ function JikoprSection() {
             <Textarea
               className="w-full h-40 m-0 text-sm"
               placeholder="Enter Your Self Promotion Here"
+              value={summaries.pr}
+              onChange={(e) => setSummaries({ pr: e.target.value })}
             />
           </div>
         </CardContent>

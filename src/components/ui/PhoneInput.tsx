@@ -1,38 +1,31 @@
-import * as React from "react";
-
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
 import { Label } from "./label";
+import { Input } from "./input";
 
-export function PhoneInput() {
-  const [value, setValue] = React.useState("");
+interface PhoneProps {
+  value?: string;
+  onChange: (val: string) => void;
+}
 
+export function PhoneInput({ value, onChange }: PhoneProps) {
   return (
-    <div className="flex flex-col gap-3  max-w-fit w-[76vw] md:w-[85%]">
+    <div className="flex flex-col gap-3  w-fit">
       <Label htmlFor="phone">Phone No.</Label>
       <div className="space-y-2" id="phone">
-        <InputOTP
-          maxLength={11}
-          value={value}
-          onChange={(value) => setValue(value)}
-        >
+        {/* <InputOTP maxLength={11} value={num} onChange={handleChange}>
           <InputOTPGroup className="w-full">
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-            <InputOTPSlot index={2} />
-            <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
-            <InputOTPSlot index={6} />
-            <InputOTPSlot index={7} />
-            <InputOTPSlot index={8} />
-            <InputOTPSlot index={9} />
-            <InputOTPSlot index={10} />
-          </InputOTPGroup>
-        </InputOTP>
+            {Array.from({ length: 11 }).map((_, idx) => (
+              <InputOTPSlot key={idx} index={idx} />
+            ))}
+        </InputOTPGroup>
+        </InputOTP> */}
+        <Input
+          id="phone"
+          type="tel"
+          value={value}
+          maxLength={11}
+          placeholder="Enter Your Number"
+          onChange={(e) => onChange(e.target.value)}
+        />
       </div>
     </div>
   );

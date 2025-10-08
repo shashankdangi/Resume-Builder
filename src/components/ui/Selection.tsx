@@ -11,12 +11,14 @@ interface Selection {
   id: string;
   placeholder: string;
   options: string[];
+  value?: string;
+  onChange?: (val: string) => void;
 }
-function Selection({ id, placeholder, options }: Selection) {
+function Selection({ id, placeholder, options, value, onChange }: Selection) {
   return (
     <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{id}</Label>
-      <Select>
+      <Select value={value} onValueChange={onChange}>
         <SelectTrigger className="w-full" id={id}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>

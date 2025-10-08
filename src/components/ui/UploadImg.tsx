@@ -10,13 +10,22 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 
-export default function ImageUploader() {
+interface ImageUploader {
+  value?: string;
+  onUpload: (url: string) => void;
+}
+
+export default function ImageUploader({ value, onUpload }: ImageUploader) {
   const [image, setImage] = useState<string | null>(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
   const [open, setOpen] = useState(false);
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (value) setCroppedImage(value);
+  }, [value]);
 
   const onCropComplete = useCallback(
     (_croppedArea: Area, croppedAreaPixels: Area) => {
@@ -74,6 +83,7 @@ export default function ImageUploader() {
       if (!image || !croppedAreaPixels) return;
       const croppedImg = await getCroppedImg(image, croppedAreaPixels);
       setCroppedImage(croppedImg);
+      onUpload?.(croppedImg);
       setOpen(false);
     } catch (error) {
       console.error("Crop failed:", error);
@@ -120,7 +130,7 @@ export default function ImageUploader() {
                 image={image}
                 crop={crop}
                 zoom={zoom}
-                aspect={1}
+                aspect={30 / 40}
                 onCropChange={setCrop}
                 onZoomChange={setZoom}
                 onCropComplete={onCropComplete}
