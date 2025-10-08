@@ -23,98 +23,100 @@ export default function PersonalInfoSection() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Personal Details</CardTitle>
-        <CardDescription>Enter Your Information</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-5">
-          {/* Name */}
-          <div className="grid gap-2">
-            <Label htmlFor="Name">Name</Label>
-            <Input
-              id="Name"
-              type="text"
-              placeholder="Tanaka"
-              value={personalInfo.name}
-              onChange={(e) => updateField("name", e.target.value)}
-            />
-          </div>
+    <div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Personal Details</CardTitle>
+          <CardDescription>Enter Your Information</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-5">
+            {/* Name */}
+            <div className="grid gap-2">
+              <Label htmlFor="Name">Name</Label>
+              <Input
+                id="Name"
+                type="text"
+                placeholder="Tanaka"
+                value={personalInfo.name}
+                onChange={(e) => updateField("name", e.target.value)}
+              />
+            </div>
 
-          {/* Furigana */}
-          <div className="grid gap-2">
-            <Label htmlFor="FuriganaName">Furigana</Label>
-            <Input
-              id="FuriganaName"
-              type="text"
-              placeholder="たなか"
-              value={personalInfo.jpName}
-              onChange={(e) => updateField("jpName", e.target.value)}
-            />
-          </div>
+            {/* Furigana */}
+            <div className="grid gap-2">
+              <Label htmlFor="FuriganaName">Furigana</Label>
+              <Input
+                id="FuriganaName"
+                type="text"
+                placeholder="たなか"
+                value={personalInfo.jpName}
+                onChange={(e) => updateField("jpName", e.target.value)}
+              />
+            </div>
 
-          {/* Birthday */}
-          <div className="grid gap-2">
-            <DatePicker
-              Name="Birthday"
-              value={{ date: personalInfo.dob }}
-              onChange={(date: MonthYear) =>
-                updateField("dob", date.date ?? "")
-              }
-            />
-          </div>
+            {/* Birthday */}
+            <div className="grid gap-2">
+              <DatePicker
+                Name="Birthday"
+                value={{ date: personalInfo.dob }}
+                onChange={(date: MonthYear) =>
+                  updateField("dob", date.date ?? "")
+                }
+              />
+            </div>
 
-          {/* Gender */}
-          <div className="grid gap-2">
-            <Selection
-              id="Gender"
-              placeholder="Gender"
-              options={["Male", "Female"]}
-              value={personalInfo.gender}
-              onChange={(val: string) => updateField("gender", val)}
-            />
-          </div>
+            {/* Gender */}
+            <div className="grid gap-2">
+              <Selection
+                id="Gender"
+                placeholder="Gender"
+                options={["Male", "Female"]}
+                value={personalInfo.gender}
+                onChange={(val: string) => updateField("gender", val)}
+              />
+            </div>
 
-          {/* Country */}
-          <div className="grid gap-2">
-            <CountrySelect
-              value={personalInfo.country}
-              onChange={(val: string) => updateField("country", val)}
-            />
-          </div>
+            {/* Country */}
+            <div className="grid gap-2">
+              <CountrySelect
+                value={personalInfo.country}
+                onChange={(val: string) => updateField("country", val)}
+              />
+            </div>
 
-          {/* Marital Status */}
-          <div className="grid gap-2">
-            <Selection
-              id="MaritialStatus"
-              placeholder="Are You Married?"
-              options={["Married", "Single"]}
-              value={personalInfo.married}
-              onChange={(val: string) => updateField("married", val)}
-            />
-          </div>
+            {/* Marital Status */}
+            <div className="grid gap-2">
+              <Selection
+                id="MaritialStatus"
+                placeholder="Are You Married?"
+                options={["Married", "Single"]}
+                value={personalInfo.married}
+                onChange={(val: string) => updateField("married", val)}
+              />
+            </div>
 
-          {/* Spouse Support */}
-          <div className="grid gap-2">
-            <Selection
-              id="SupportSpouse"
-              placeholder="Do You Support Finances?"
-              options={["Yes", "No"]}
-              value={personalInfo.spouse}
-              onChange={(val: string) => updateField("spouse", val)}
-            />
-          </div>
+            {/* Spouse Support */}
+            <div className="grid gap-2">
+              <Selection
+                id="SupportSpouse"
+                placeholder="Do You Support Finances?"
+                options={["Yes", "No"]}
+                value={personalInfo.spouse}
+                onChange={(val: string) => updateField("spouse", val)}
+              />
+            </div>
 
-          {/* Upload Image */}
-          <div className="grid gap-2">
-            <UploadImg
-              value={personalInfo.photo}
-              onUpload={(url: string) => updateField("photo", url)}
-            />
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+            {/* Upload Image */}
+            <div className="grid gap-2">
+              <UploadImg
+                value={personalInfo.photo}
+                onUpload={(url: string) => updateField("photo", url)}
+              />
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
