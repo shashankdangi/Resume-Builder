@@ -3,6 +3,18 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  img {
+    border: none;
+    outline: none;
+  }
+
+  /* Remove margins, page-breaks, etc. */
+}
+
 :root {
   --background: oklch(0.9578 0.0058 264.5321);
   --foreground: oklch(0.4355 0.043 279.325);

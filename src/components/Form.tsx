@@ -8,6 +8,7 @@ import EducationSection from "./rirekisho/Sections/EducationSection";
 import ContanctSection from "./rirekisho/Sections/ContanctSection";
 import PersonalInfoSection from "./rirekisho/Sections/PersonalInfoSection";
 import { useResumeStore } from "@/store/userResumeStore";
+import { Link } from "react-router-dom";
 
 function Form() {
   const { clearAll } = useResumeStore();
@@ -47,8 +48,8 @@ function Form() {
         >
           Clear All
         </Button>
-        <Button size={"lg"} className="">
-          Save & Preview Resume{" "}
+        <Button size={"lg"} asChild>
+          <Link to={"/template/rirekishoprintwrapper"}> Preview </Link>
         </Button>
       </div>
     </div>

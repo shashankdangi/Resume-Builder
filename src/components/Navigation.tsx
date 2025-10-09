@@ -2,6 +2,7 @@ import { Switch } from "./ui/switch";
 import { WiDaySunny } from "react-icons/wi";
 import { GoMoon } from "react-icons/go";
 import { useTheme } from "./theme-provider";
+import { Link } from "react-router-dom";
 
 interface NavigationProps {
   mode: "light" | "dark";
@@ -20,7 +21,9 @@ function Navigation({ mode, setMode }: NavigationProps) {
   return (
     <header className="flex justify-between  border-b-2 px-5 py-5 ">
       <div>
-        <h4 className="font-bold uppercase font-sans-serif">rirekisho</h4>
+        <Link to={"/"} className="font-bold uppercase font-sans-serif">
+          rirekisho
+        </Link>
       </div>
       <div className="flex items-center gap-2">
         <Switch className="cursor-pointer" onClick={handleMode} id="modes" />
