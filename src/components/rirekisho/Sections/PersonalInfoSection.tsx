@@ -88,18 +88,18 @@ export default function PersonalInfoSection() {
             {/* Marital Status */}
             <div className="grid gap-2">
               <Selection
-                id="MaritialStatus"
-                placeholder="Are You Married?"
-                options={["Married", "Single"]}
-                value={personalInfo.married}
-                onChange={(val: string) => updateField("married", val)}
+                id="Health Status"
+                placeholder="Are You Healthy ?"
+                options={["Healthy", "Fair", "Needs Attention"]}
+                value={personalInfo.health}
+                onChange={(val: string) => updateField("health", val)}
               />
             </div>
 
             {/* Spouse Support */}
             <div className="grid gap-2">
               <Selection
-                id="SupportSpouse"
+                id="Have Spouse"
                 placeholder="Do You Support Finances?"
                 options={["Yes", "No"]}
                 value={personalInfo.spouse}

@@ -11,7 +11,7 @@ interface PersonalInfo {
   dob: string;
   gender: string;
   country: string;
-  married: string;
+  health: string;
   spouse: string;
   photo: string;
 }
@@ -60,6 +60,7 @@ export interface OtherInfo {
   until: MonthYear;
   native: string;
   english: string;
+  japanese: string;
 }
 
 export interface OtherInfoLangs {
@@ -126,7 +127,7 @@ export const useResumeStore = create<ResumeState>()(
         dob: "",
         gender: "",
         country: "",
-        married: "",
+        health: "",
         spouse: "",
         photo: "",
       },
@@ -145,6 +146,7 @@ export const useResumeStore = create<ResumeState>()(
         until: {},
         native: "",
         english: "",
+        japanese: "",
       },
       otherLangs: [],
       summaries: {
@@ -251,7 +253,7 @@ export const useResumeStore = create<ResumeState>()(
             dob: "",
             gender: "",
             country: "",
-            married: "",
+            health: "",
             spouse: "",
             photo: "",
           },
@@ -270,6 +272,7 @@ export const useResumeStore = create<ResumeState>()(
             until: {},
             native: "",
             english: "",
+            japanese: "",
           },
           otherLangs: [],
           summaries: { shibou: "", pr: "" },

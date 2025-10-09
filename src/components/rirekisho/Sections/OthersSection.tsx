@@ -57,8 +57,8 @@ function OthersSection() {
     deleteLanguage,
   } = useResumeStore();
 
-  const addLangCard = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const addLangCard = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
     addLanguage({ id: uuidv4(), language: "", proficiency: "" });
   };
 
@@ -101,6 +101,13 @@ function OthersSection() {
               </div>
               <div className="grid gap-4">
                 <Proficiency
+                  id="Japanese Proficiency"
+                  value={otherInfo.japanese}
+                  onChange={(val) => setOtherInfo({ japanese: val })}
+                />
+              </div>
+              <div className="grid gap-4">
+                <Proficiency
                   id="English Proficiency"
                   value={otherInfo.english}
                   onChange={(val) => setOtherInfo({ english: val })}
@@ -108,7 +115,7 @@ function OthersSection() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-6 py-4 md:grid md:grid-cols-2 md:gap-4">
+            <div className="flex flex-col gap-5 py-4 md:grid md:grid-cols-2 md:gap-4">
               {otherLangs.map((lang) => (
                 <OtherLangs
                   key={lang.id}
@@ -122,7 +129,18 @@ function OthersSection() {
             </div>
 
             <div className="grid gap-6 py-4">
-              <Button onClick={addLangCard}>Add Other Languages</Button>
+              <Button
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.preventDefault();
+                  if (otherLangs.length >= 3) {
+                    alert("You can only add upto 3 other languages");
+                    return;
+                  }
+                  addLangCard();
+                }}
+              >
+                Add Other Languages
+              </Button>
             </div>
           </form>
         </CardContent>
