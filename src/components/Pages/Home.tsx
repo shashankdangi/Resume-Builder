@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
+import HeroSection from "../hero-section";
 
 function Home() {
   return (
-    <div>
-      <h1>Home Page</h1>
-      <Link to={"/rirekisho"}>Rirekisho</Link>
+    <div className="">
+      <HeroSection />
     </div>
   );
 }
