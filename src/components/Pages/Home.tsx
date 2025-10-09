@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import { Button } from "../ui/button";
 
 function Home() {
   return (
-    <div>
-      <h1>Home Page</h1>
-      <Link to={"/rirekisho"}>Rirekisho</Link>
+    <div className="">
+      <Button variant={"outline"} asChild>
+        <Link to={"/rirekisho"}>Create Resume</Link>
+      </Button>
     </div>
   );
 }
