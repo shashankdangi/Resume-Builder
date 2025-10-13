@@ -4,31 +4,25 @@ import { GoMoon } from "react-icons/go";
 import { useTheme } from "./theme-provider";
 import { Link } from "react-router-dom";
 
-interface NavigationProps {
-  mode: "light" | "dark";
-  setMode: (mode: "light" | "dark") => void;
-}
-
-function Navigation({ mode, setMode }: NavigationProps) {
-  const { setTheme } = useTheme();
+function Navigation() {
+  const { theme, setTheme } = useTheme();
 
   const handleMode = () => {
-    const newMode = mode === "light" ? "dark" : "light";
-    setMode(newMode);
+    const newMode = theme === "light" ? "dark" : "light";
     setTheme(newMode);
   };
 
   return (
-    <header className="flex justify-between  border-b-2 px-5 py-5 ">
+    <header className="flex justify-between  mx-auto  w-[80%] items-center  pt-8  bg-none">
       <div>
-        <Link to={"/"} className="font-bold uppercase font-sans-serif">
+        <Link to={"/"} className="font-bold uppercase  ">
           rirekisho
         </Link>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 ">
         <Switch className="cursor-pointer" onClick={handleMode} id="modes" />
         <label htmlFor="modes">
-          {mode === "light" ? <WiDaySunny /> : <GoMoon />}
+          {theme === "light" ? <WiDaySunny /> : <GoMoon />}
         </label>
       </div>
     </header>

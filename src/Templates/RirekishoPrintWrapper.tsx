@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
 import Rirekisho from "./Rirekisho";
+import { Button } from "@/components/ui/button";
 
 const RirekishoPrintWrapper = () => {
   // ✅ use the new API ref name
@@ -14,6 +15,8 @@ const RirekishoPrintWrapper = () => {
       @page {
         size: A4 portrait;
         margin: 10mm;
+
+
       }
       body {
         -webkit-print-color-adjust: exact !important;
@@ -35,19 +38,17 @@ const RirekishoPrintWrapper = () => {
   }, [handlePrint]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center py-10 ">
       {/* ✅ Printable area */}
       <div ref={contentRef}>
         <Rirekisho />
       </div>
 
       {/* ✅ Print button (won’t show in print view) */}
-      <button
-        onClick={() => handlePrint?.()}
-        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg no-print"
-      >
+
+      <Button onClick={() => handlePrint?.()} className="mt-20">
         Print 履歴書
-      </button>
+      </Button>
     </div>
   );
 };

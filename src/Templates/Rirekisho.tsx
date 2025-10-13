@@ -185,7 +185,7 @@ function Rirekisho() {
     <div className="md:block hidden print:block ">
       {/* //! Front Page */}
       <div className="Page1  ">
-        <div className="resume-container  py-7 w-[210mm] h-[297mm] flex justify-center text-[12px] ">
+        <div className="resume-container border-2  p-10 w-full  h-[297mm] flex justify-center text-[12px] bg-white text-black ">
           <div className="container w-full h-full grid grid-rows-6 gap-5">
             {/* Personal Info */}
             <div className="personal-info border-2 row-span-2 grid grid-cols-4 w-full h-full overflow-hidden ">
@@ -557,8 +557,8 @@ function Rirekisho() {
         </div>
       </div>
       {/* //! Last Page */}
-      <div className="Page2">
-        <div className="resume-container py-7   w-[210mm] h-[297mm] flex justify-center text-[12px] ">
+      <div className="Page2 ">
+        <div className="resume-container border-2  p-12  w-[210mm] h-[297mm] flex justify-center text-[12px] bg-white text-black ">
           <div className="border-2 w-full h-full grid grid-rows-9">
             {/* Top  */}
             <div className="border-b-2 row-span-4 grid grid-rows-7">
