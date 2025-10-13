@@ -1,73 +1,68 @@
-# React + TypeScript + Vite
+# Rirekisho Resume Creator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **resume creating app** for building Japanese-style resumes (**Rirekisho**) and printing them as PDFs. Choose from multiple templates, fill in your details, and generate a professional resume in seconds.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- **Multiple Resume Templates**: Select from pre-designed templates to match your style.
+- **Interactive Resume Builder**: Fill in your personal, educational, and professional details.
+- **Print & PDF Export**: Generate a PDF-ready resume using **react-to-print**.
+- **Custom Page Sizes**: Supports **A4**, **B4**, and other standard paper sizes with adjustable margins.
+- **Dark Mode**: Toggle between light and dark themes.
+- **Custom Fonts**: Uses **Montserrat**, **Lora**, and **Fira Code** for modern typography.
+- **No Print UI Elements**: Buttons and other interface elements are automatically hidden in print.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React** + **TypeScript**
+- **Tailwind CSS** (with custom themes and variables)
+- **tw-animate-css** for animations
+- **react-to-print** for printing and PDF generation
+- **Vite** for fast development and bundling
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## How to Use
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Choose a Template**: Select the resume template you like.
+2. **Fill in Your Details**: Input your personal, educational, and professional information.
+3. **Preview**: See how your resume looks before printing.
+4. **Print / Export PDF**: Click the **Print** button or press `Ctrl+P` (Windows/Linux) or `Cmd+P` (Mac) to generate a PDF.
+
+> 💡 **Tip**: Paper size and margins can be adjusted in your browser’s print dialog.
+> All UI elements (like buttons and menus) are automatically hidden when printing or saving as PDF.
+
+---
+
+## 📦 Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/rirekisho-resume.git
+cd rirekisho-resume
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install Dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```npm install
+#or
+yarn install
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. Start the development Server;
+
+```npm run dev
+#or
+yarn dev
+```
+
+4. Open the Server in Your Browser
+
+```
+http://localhost:5173
 ```
